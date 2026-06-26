@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --chad-bg: #09090B;
+  --chad-card: #18181B;
+  --chad-accent: #3DD6F5;
+  --chad-accent-end: #56C7B0;
+}
+
+body {
+  background-color: var(--chad-bg);
+  color: #ffffff;
+}
+
+/* Pause marquee on hover */
+.pause-on-hover:hover .animate-marquee,
+.pause-on-hover:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
+
+/* Thin dark scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #27272A; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #3DD6F5; }
+
+.text-gradient {
+  background: linear-gradient(135deg, #3DD6F5, #56C7B0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
