@@ -55,7 +55,7 @@ export function TokenBanner({ tokens, reverse = false, offset = 0 }: Props) {
   const items = [...shifted, ...shifted];
 
   return (
-    <div className="w-full overflow-hidden bg-chad-bg border-y border-chad-border py-2 pause-on-hover">
+    <div className="w-full overflow-hidden border-y border-chad-border py-2 pause-on-hover">
       <div
         className={`inline-flex ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
         style={{ width: "max-content" }}

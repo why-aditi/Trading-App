@@ -19,12 +19,7 @@ function validCandles(candles?: CandlestickData[]) {
   );
 }
 
-interface Props {
-  mint: string;
-  initialCandles?: CandlestickData[];
-}
-
-export function PriceChart({ mint, initialCandles }: Props) {
+export function PriceChart({ mint }: { mint: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [interval, setInterval] = useState<Interval>("1H");
   const [loading, setLoading] = useState(true);
@@ -61,8 +56,6 @@ export function PriceChart({ mint, initialCandles }: Props) {
     setLoading(true);
     setError(null);
 
-    const prefetched = interval === "1H" ? validCandles(initialCandles) : [];
-
     async function load(retry = false) {
       try {
         const body = await fetch(`/api/tokens/${mint}/ohlcv?type=${interval}`).then((r) => r.json());
@@ -90,21 +83,14 @@ export function PriceChart({ mint, initialCandles }: Props) {
       }
     }
 
-    if (prefetched.length) {
-      series.setData(prefetched);
-      chart.timeScale().fitContent();
-      setLoading(false);
-      setError(null);
-    } else {
-      load();
-    }
+    load();
 
     return () => {
       cancelled = true;
       ro.disconnect();
       chart.remove();
     };
-  }, [mint, interval, initialCandles]);
+  }, [mint, interval]);
 
   return (
     <div>

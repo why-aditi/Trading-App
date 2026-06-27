@@ -66,10 +66,13 @@ interface Props {
   mint: string;
   initialTrending: BirdEyeToken[];
   initialCandles: OhlcvCandle[];
+  initialOverview?: TokenOverview | null;
 }
 
-export function TokenDetail({ mint, initialTrending, initialCandles }: Props) {
-  const [overview, setOverview] = useState<TokenOverview | null>(() => resolveSeedOverview(mint, initialTrending));
+export function TokenDetail({ mint, initialTrending, initialCandles, initialOverview }: Props) {
+  const [overview, setOverview] = useState<TokenOverview | null>(
+    () => initialOverview ?? resolveSeedOverview(mint, initialTrending)
+  );
   const [holders, setHolders] = useState<TokenHolder[]>([]);
   const [holdersLoading, setHoldersLoading] = useState(true);
   const trades = useTokenTrades(mint);
@@ -82,27 +85,20 @@ export function TokenDetail({ mint, initialTrending, initialCandles }: Props) {
 
     setHoldersLoading(true);
 
-    const timer = setTimeout(() => {
-      fetch(`/api/tokens/${mint}/bundle`)
-        .then((r) => r.json())
-        .then((body: {
-          overview?: TokenOverview | null;
-          holders?: TokenHolder[];
-        }) => {
-          if (mintRef.current !== mint) return;
-          if (body.overview) {
-            overviewCache.set(mint, body.overview);
-            setOverview(body.overview);
-          }
-          setHolders(Array.isArray(body.holders) ? body.holders : []);
-        })
-        .catch(() => {})
-        .finally(() => {
-          if (mintRef.current === mint) setHoldersLoading(false);
-        });
-    }, 500);
-
-    return () => clearTimeout(timer);
+    fetch(`/api/tokens/${mint}/bundle`)
+      .then((r) => r.json())
+      .then((body: { overview?: TokenOverview | null; holders?: TokenHolder[] }) => {
+        if (mintRef.current !== mint) return;
+        if (body.overview) {
+          overviewCache.set(mint, body.overview);
+          setOverview(body.overview);
+        }
+        setHolders(Array.isArray(body.holders) ? body.holders : []);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (mintRef.current === mint) setHoldersLoading(false);
+      });
   }, [mint, initialTrending]);
 
   const up = (overview?.priceChange24hPercent ?? 0) >= 0;
@@ -148,7 +144,7 @@ export function TokenDetail({ mint, initialTrending, initialCandles }: Props) {
       )}
 
       <div className="bg-chad-card rounded-2xl border border-chad-border p-4">
-        <PriceChart mint={mint} initialCandles={initialCandles} />
+        <PriceChart mint={mint} />
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">

@@ -5,15 +5,16 @@ import { Nav } from "@/components/Nav";
 import { TokenList } from "@/components/trade/TokenList";
 import { TokenDetail } from "@/components/trade/TokenDetail";
 import { TradePanel } from "@/components/trade/TradePanel";
-import type { BirdEyeToken, OhlcvCandle } from "@/lib/birdeye";
+import type { BirdEyeToken, OhlcvCandle, TokenOverview } from "@/lib/birdeye";
 
 interface Props {
   mint: string;
   initialTrending: BirdEyeToken[];
   initialCandles: OhlcvCandle[];
+  initialOverview: TokenOverview | null;
 }
 
-export function TradeClient({ mint, initialTrending, initialCandles }: Props) {
+export function TradeClient({ mint, initialTrending, initialCandles, initialOverview }: Props) {
   const [side, setSide] = useState<"buy" | "sell">("buy");
   const [amount, setAmount] = useState("");
   const [, setRefreshKey] = useState(0);
@@ -30,7 +31,7 @@ export function TradeClient({ mint, initialTrending, initialCandles }: Props) {
           <TokenList mint={mint} initialTrending={initialTrending} layout="horizontal" />
         </div>
         <main className="flex-1 overflow-y-auto">
-          <TokenDetail mint={mint} initialTrending={initialTrending} initialCandles={initialCandles} />
+          <TokenDetail mint={mint} initialTrending={initialTrending} initialCandles={initialCandles} initialOverview={initialOverview} />
         </main>
       </div>
 

@@ -17,8 +17,8 @@ export default async function Home() {
   return (
     <>
       <AuthSync defaultMint={tokens[0]?.address} />
-      <TokenBanner tokens={tokens} />
       <Nav />
+      <TokenBanner tokens={tokens} />
       <Hero />
       <ValueProps />
       <HowItWorks />

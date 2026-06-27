@@ -27,7 +27,7 @@ interface Props {
 export function TokenList({ mint, initialTrending, layout = "vertical" }: Props) {
   const { tokens, loading, error: errCode } = useTrendingTokens(initialTrending);
   const router = useRouter();
-  const { logout } = usePrivy();
+  const { authenticated, logout } = usePrivy();
   const error = errCode ? (ERROR_MESSAGES[errCode] ?? ERROR_MESSAGES.unavailable) : null;
 
   const list = (
@@ -95,14 +95,16 @@ export function TokenList({ mint, initialTrending, layout = "vertical" }: Props)
         <p className="text-xs font-semibold text-chad-muted uppercase tracking-wider">Trending</p>
       </div>
       <div className="flex-1 overflow-y-auto">{list}</div>
-      <div className="p-3 border-t border-chad-border">
-        <button
-          onClick={async () => { await logout(); router.replace("/"); }}
-          className="w-full py-2 rounded-lg text-xs text-chad-muted hover:text-chad-red hover:bg-white/5 transition-colors"
-        >
-          Sign out
-        </button>
-      </div>
+      {authenticated && (
+        <div className="p-3 border-t border-chad-border">
+          <button
+            onClick={async () => { await logout(); router.replace("/"); }}
+            className="w-full py-2 rounded-lg text-xs text-chad-muted hover:text-chad-red hover:bg-white/5 transition-colors"
+          >
+            Sign out
+          </button>
+        </div>
+      )}
     </div>
   );
 }
