@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChadWallet Web
 
-## Getting Started
+Web surface for [ChadWallet](https://chadwallet.xyz) — marketing landing page + in-browser Solana trading.
 
-First, run the development server:
+**Mobile apps:** [iOS](https://apps.apple.com/us/app/chadwallet/id6757367474) · [Android](https://play.google.com/store/apps/details?id=xyz.chadwallet.www)
+
+## Stack
+
+- **Next.js 14** (App Router) + TypeScript + Tailwind CSS
+- **Privy** — Google login, embedded Solana wallet
+- **BirdEye** — trending tokens, price charts (OHLCV), live trades
+- **Jupiter** — swap quotes + transaction building
+- **Alchemy** — Solana RPC (balances, holders, tx submission)
+- **Supabase** — user table (privy_id, wallet, email)
+- **Vercel** — hosting · **Cloudflare** — DNS
+
+## Local dev
 
 ```bash
+cp .env.local.example .env
+# fill in all keys (see below)
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Where to get it |
+|----------|----------------|
+| `NEXT_PUBLIC_PRIVY_APP_ID` | [privy.io](https://privy.io) dashboard |
+| `PRIVY_APP_SECRET` | Privy dashboard |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project settings |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase project settings |
+| `BIRDEYE_API_KEY` | [birdeye.so/data-api](https://birdeye.so/data-api) |
+| `NEXT_PUBLIC_ALCHEMY_RPC_URL` | [alchemy.com](https://alchemy.com) → Solana app → HTTP URL |
+| `ALCHEMY_RPC_URL` | same Alchemy key, no `NEXT_PUBLIC` prefix |
 
-## Learn More
+## Supabase setup
 
-To learn more about Next.js, take a look at the following resources:
+Run once in the SQL editor:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+create table if not exists users (
+  id uuid primary key default gen_random_uuid(),
+  privy_id text unique not null,
+  wallet_address text,
+  email text,
+  created_at timestamptz default now()
+);
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    page.tsx                  # Landing page (server)
+    trade/[mint]/             # Trading page
+      page.tsx                # Server — prefetches trending + candles
+      TradeClient.tsx         # Client shell
+    api/
+      tokens/trending/        # BirdEye trending list
+      tokens/[mint]/          # Token overview, OHLCV, trades
+      holders/[mint]/         # Top holders via Alchemy
+      quote/                  # Jupiter quote proxy
+      swap/                   # Jupiter swap tx builder
+      auth/upsert/            # Privy → Supabase user sync
+  components/
+    Nav.tsx / Hero.tsx / Footer.tsx / ...
+    trade/
+      TokenList.tsx           # Left sidebar
+      TokenDetail.tsx         # Chart + holders + live trades
+      TradePanel.tsx          # Buy / sell form
+      PriceChart.tsx          # lightweight-charts v5 candlesticks
+  hooks/
+    usePrivyWallet.ts         # Login → Supabase upsert
+    useTokenTrades.ts         # 5s polling for live trades
+    useJupiterQuote.ts        # Debounced Jupiter quote
+    useWalletBalances.ts      # SOL + token balance via Alchemy
+  lib/
+    birdeye.ts                # BirdEye API + in-memory cache
+    privy-provider.tsx        # PrivyProvider wrapper
+    supabase.ts               # Lazy Supabase singleton
+```
