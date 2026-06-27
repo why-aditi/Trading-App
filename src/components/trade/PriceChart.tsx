@@ -36,7 +36,7 @@ export function PriceChart({ mint, initialCandles }: Props) {
 
     const chart = createChart(container, {
       layout: { background: { color: "#18181B" }, textColor: "#A1A1AA" },
-      grid: { vertLines: { color: "#27272A" }, horLines: { color: "#27272A" } },
+      grid: { vertLines: { color: "#27272A" }, horzLines: { color: "#27272A" } },
       rightPriceScale: { borderColor: "#27272A" },
       timeScale: { borderColor: "#27272A", timeVisible: true },
       width: container.clientWidth,
