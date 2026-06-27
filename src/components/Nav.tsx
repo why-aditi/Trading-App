@@ -36,12 +36,12 @@ export function Nav() {
   }, [menuOpen]);
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-chad-border bg-chad-bg/90 backdrop-blur-md">
+    <nav className="sticky top-0 z-40 w-full border-b border-white/5 bg-[#05060d]/70 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl flex items-center justify-between px-4 py-3 sm:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo-dark.png" alt="ChadWallet" width={32} height={32} className="rounded-lg" />
-          <span className="font-bold text-lg tracking-tight">ChadWallet</span>
+          <span className="lower font-black text-lg tracking-tight">chadwallet</span>
         </Link>
 
         {/* Center links — landing page only */}

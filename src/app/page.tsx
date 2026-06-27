@@ -6,6 +6,7 @@ import { ValueProps } from "@/components/ValueProps";
 import { HowItWorks } from "@/components/HowItWorks";
 import { TrendingGrid } from "@/components/TrendingGrid";
 import { Faq } from "@/components/Faq";
+import { LegendsCta } from "@/components/LegendsCta";
 import { Footer } from "@/components/Footer";
 import { AuthSync } from "@/components/AuthSync";
 
@@ -23,6 +24,7 @@ export default async function Home() {
       <HowItWorks />
       <TrendingGrid tokens={tokens} />
       <Faq />
+      <LegendsCta />
       <Footer />
       <TokenBanner tokens={tokens} reverse offset={10} />
     </>

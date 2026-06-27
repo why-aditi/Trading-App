@@ -143,8 +143,10 @@ export function tokenToOverview(token: BirdEyeToken): TokenOverview {
   };
 }
 
+import type { UTCTimestamp } from "lightweight-charts";
+
 export interface OhlcvCandle {
-  time: number;
+  time: UTCTimestamp;
   open: number;
   high: number;
   low: number;
@@ -195,7 +197,7 @@ export async function getOhlcv(
       o?: number; h?: number; l?: number; c?: number;
       open?: number; high?: number; low?: number; close?: number;
     }) => ({
-      time: d.unixTime,
+      time: d.unixTime as UTCTimestamp,
       open: d.o ?? d.open,
       high: d.h ?? d.high,
       low: d.l ?? d.low,
