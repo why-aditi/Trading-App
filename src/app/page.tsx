@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { ValueProps } from "@/components/ValueProps";
 import { HowItWorks } from "@/components/HowItWorks";
+import { VideoShowcase } from "@/components/VideoShowcase";
 import { TrendingGrid } from "@/components/TrendingGrid";
 import { Faq } from "@/components/Faq";
 import { LegendsCta } from "@/components/LegendsCta";
@@ -22,6 +23,7 @@ export default async function Home() {
       <Hero />
       <ValueProps />
       <HowItWorks />
+      <VideoShowcase />
       <TrendingGrid tokens={tokens} />
       <Faq />
       <LegendsCta />
