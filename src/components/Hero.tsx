@@ -74,25 +74,7 @@ export function Hero() {
             Google Play
           </a>
         </div>
-
-        {/* Floating phone trio */}
-        <div className="relative flex items-end justify-center gap-0 sm:gap-4">
-          <div
-            className="pointer-events-none absolute inset-x-0 -top-10 mx-auto w-[420px] h-[420px] rounded-full blur-3xl opacity-40"
-            style={{ background: "radial-gradient(circle, #56C7B0 0%, transparent 65%)" }}
-          />
-          <div className="hidden sm:block relative w-40 lg:w-48 translate-y-6 opacity-90">
-            <Image src="/screens/portfolio.png" alt="Portfolio" width={240} height={520} className="rounded-[2rem] border border-white/10 shadow-2xl" />
-          </div>
-          <div className="relative w-56 lg:w-64 z-10 animate-float">
-            <Image src="/screens/discover.png" alt="Discover trending tokens" width={320} height={690} className="rounded-[2.2rem] border border-white/10 shadow-2xl" priority />
-          </div>
-          <div className="hidden sm:block relative w-40 lg:w-48 translate-y-6 opacity-90">
-            <Image src="/screens/token.png" alt="Token detail" width={240} height={520} className="rounded-[2rem] border border-white/10 shadow-2xl" />
-          </div>
-        </div>
       </div>
-
       {/* Fade into next section */}
       <div className="pointer-events-none absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-chad-bg" />
     </section>
