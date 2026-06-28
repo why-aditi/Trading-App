@@ -4,7 +4,7 @@ export function VideoShowcase() {
       <div className="pointer-events-none absolute inset-0 starfield opacity-30" />
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl animate-pulse-glow"
-        style={{ background: "radial-gradient(circle, rgba(61,214,245,0.30) 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(109,91,255,0.30) 0%, transparent 65%)" }}
       />
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-12 px-4 sm:px-6 md:flex-row md:justify-between md:gap-16">

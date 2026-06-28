@@ -5,8 +5,8 @@
 :root {
   --chad-bg: #09090B;
   --chad-card: #18181B;
-  --chad-accent: #3DD6F5;
-  --chad-accent-end: #56C7B0;
+  --chad-accent: #6D5BFF;
+  --chad-accent-end: #9B8CFF;
 }
 
 body {
@@ -31,10 +31,18 @@ body {
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: #3DD6F5; }
+::-webkit-scrollbar-thumb:hover { background: #6D5BFF; }
+
+/* Smooth in-page scrolling for nav anchors; clear the sticky navbar */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 84px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 .text-gradient {
-  background: linear-gradient(135deg, #3DD6F5, #56C7B0);
+  background: linear-gradient(135deg, #6D5BFF, #9B8CFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -46,9 +54,9 @@ body {
 .space-bg {
   background-color: #05060d;
   background-image:
-    radial-gradient(1200px 600px at 50% -10%, rgba(61, 214, 245, 0.18), transparent 60%),
-    radial-gradient(900px 500px at 85% 20%, rgba(86, 199, 176, 0.12), transparent 55%),
-    radial-gradient(700px 700px at 10% 90%, rgba(61, 214, 245, 0.10), transparent 60%);
+    radial-gradient(1200px 600px at 50% -10%, rgba(109, 91, 255, 0.20), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(155, 140, 255, 0.14), transparent 55%),
+    radial-gradient(700px 700px at 10% 90%, rgba(109, 91, 255, 0.12), transparent 60%);
 }
 
 .starfield {
@@ -72,7 +80,7 @@ body {
 
 /* Glow ring behind devices / CTAs */
 .glow-accent {
-  box-shadow: 0 0 80px 0 rgba(61, 214, 245, 0.25);
+  box-shadow: 0 0 80px 0 rgba(109, 91, 255, 0.30);
 }
 
 /* Soft top-fade divider so sections blend into the void */

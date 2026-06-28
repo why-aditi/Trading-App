@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePrivy } from "@privy-io/react-auth";
 import type { BirdEyeToken } from "@/lib/birdeye";
@@ -24,10 +25,13 @@ interface Props {
   layout?: "vertical" | "horizontal";
 }
 
+const CATEGORIES = ["Trending", "Verified", "Most held", "Gainers"] as const;
+
 export function TokenList({ mint, initialTrending, layout = "vertical" }: Props) {
   const { tokens, loading, error: errCode } = useTrendingTokens(initialTrending);
   const router = useRouter();
   const { authenticated, logout } = usePrivy();
+  const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("Trending");
   const error = errCode ? (ERROR_MESSAGES[errCode] ?? ERROR_MESSAGES.unavailable) : null;
 
   const list = (
@@ -91,8 +95,24 @@ export function TokenList({ mint, initialTrending, layout = "vertical" }: Props)
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-chad-border">
-        <p className="text-xs font-semibold text-chad-muted uppercase tracking-wider">Trending</p>
+      <div className="flex items-center gap-1 overflow-x-auto border-b border-chad-border px-2 py-2">
+        {CATEGORIES.map((c) => {
+          const live = c === "Trending";
+          return (
+            <button
+              key={c}
+              onClick={() => setCategory(c)}
+              className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
+                category === c
+                  ? "bg-chad-accent/15 text-chad-accent"
+                  : "text-chad-muted hover:text-white"
+              }`}
+            >
+              {live && <span className="h-1.5 w-1.5 rounded-full bg-chad-green animate-pulse" />}
+              {c}
+            </button>
+          );
+        })}
       </div>
       <div className="flex-1 overflow-y-auto">{list}</div>
       {authenticated && (

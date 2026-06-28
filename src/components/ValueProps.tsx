@@ -7,10 +7,10 @@ type Card = { label: string; title: string; src: string; alt: string };
 const cards: Card[] = [
   { label: "LEADERBOARD", title: "become a legend, top the leaderboard", src: "/screens/kol.png", alt: "Trader leaderboard screen" },
   { label: "FEED", title: "discover and follow top traders", src: "/screens/discover.png", alt: "Discover feed of trending tokens" },
-  { label: "ALERTS", title: "real-time alerts on what whales buy", src: "/screens/token.png", alt: "Token detail with live trades" },
-  { label: "EASY ONBOARDING", title: "an account in an instant", src: "/screens/splash.png", alt: "Sign in screen" },
-  { label: "ZERO COMPLEXITY", title: "search any solana token", src: "/screens/search.png", alt: "Token search screen" },
-  { label: "ONE CLICK TO BUY", title: "fund with Apple Pay", src: "/screens/deposit.png", alt: "Deposit and fund screen" },
+  { label: "ALERTS", title: "real time notifications for what the best are buying", src: "/screens/token.png", alt: "Token detail with live trades" },
+  { label: "EASY ONBOARDING", title: "create an account in an instant", src: "/screens/splash.png", alt: "Sign in screen" },
+  { label: "ZERO COMPLEXITY", title: "search any token in seconds", src: "/screens/search.png", alt: "Token search screen" },
+  { label: "ONE CLICK TO BUY", title: "fund with apple pay", src: "/screens/deposit.png", alt: "Deposit and fund screen" },
 ];
 
 export function ValueProps() {

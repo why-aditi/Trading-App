@@ -3,7 +3,7 @@ import { TokenBanner } from "@/components/TokenBanner";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { ValueProps } from "@/components/ValueProps";
-import { HowItWorks } from "@/components/HowItWorks";
+import { CrossDevice } from "@/components/CrossDevice";
 import { VideoShowcase } from "@/components/VideoShowcase";
 import { TrendingGrid } from "@/components/TrendingGrid";
 import { Faq } from "@/components/Faq";
@@ -21,8 +21,8 @@ export default async function Home() {
       <Nav />
       <TokenBanner tokens={tokens} />
       <Hero />
+      <CrossDevice />
       <ValueProps />
-      <HowItWorks />
       <VideoShowcase />
       <TrendingGrid tokens={tokens} />
       <Faq />

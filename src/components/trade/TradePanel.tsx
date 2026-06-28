@@ -104,7 +104,7 @@ export function TradePanel({ mint, side, setSide, amount, setAmount, onSwapSucce
         <button
           onClick={login}
           className="px-6 py-2.5 rounded-full text-sm font-semibold text-chad-bg"
-          style={{ background: "linear-gradient(135deg, #3DD6F5, #56C7B0)" }}
+          style={{ background: "linear-gradient(135deg, #6D5BFF, #9B8CFF)" }}
         >
           Sign in
         </button>
@@ -152,6 +152,39 @@ export function TradePanel({ mint, side, setSide, amount, setAmount, onSwapSucce
           placeholder="0.00"
           className="w-full bg-chad-card border border-chad-border rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-chad-accent"
         />
+
+        {/* Quick amounts */}
+        <div className="flex gap-2 pt-1">
+          {side === "buy" ? (
+            <>
+              {["0.1", "0.5", "1"].map((v) => (
+                <button
+                  key={v}
+                  onClick={() => setAmount(v)}
+                  className="flex-1 rounded-lg border border-chad-border bg-chad-card py-1.5 text-xs font-semibold text-chad-muted transition-colors hover:border-chad-accent hover:text-white"
+                >
+                  {v}
+                </button>
+              ))}
+              <button
+                onClick={() => setAmount(sol > 0 ? (sol * 0.99).toFixed(3) : "")}
+                className="flex-1 rounded-lg border border-chad-border bg-chad-card py-1.5 text-xs font-semibold text-chad-muted transition-colors hover:border-chad-accent hover:text-white"
+              >
+                Max
+              </button>
+            </>
+          ) : (
+            ([["25%", 0.25], ["50%", 0.5], ["100%", 1]] as [string, number][]).map(([label, frac]) => (
+              <button
+                key={label}
+                onClick={() => setAmount(token > 0 ? (token * frac).toString() : "")}
+                className="flex-1 rounded-lg border border-chad-border bg-chad-card py-1.5 text-xs font-semibold text-chad-muted transition-colors hover:border-chad-accent hover:text-white"
+              >
+                {label}
+              </button>
+            ))
+          )}
+        </div>
       </div>
 
       {/* Quote */}

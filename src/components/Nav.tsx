@@ -47,8 +47,8 @@ export function Nav() {
         {/* Center links — landing page only */}
         {isLanding && (
           <div className="hidden md:flex items-center gap-6 text-sm text-chad-muted">
+            <Link href="#web" className="hover:text-white transition-colors">Web app</Link>
             <Link href="#features" className="hover:text-white transition-colors">Features</Link>
-            <Link href="#how-it-works" className="hover:text-white transition-colors">How it works</Link>
             <Link href="#faq" className="hover:text-white transition-colors">FAQ</Link>
           </div>
         )}
@@ -92,7 +92,7 @@ export function Nav() {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold text-chad-bg bg-chad-gradient hover:opacity-90 transition-opacity"
-              style={{ background: "linear-gradient(135deg, #3DD6F5, #56C7B0)" }}
+              style={{ background: "linear-gradient(135deg, #6D5BFF, #9B8CFF)" }}
             >
               Get the app
             </a>

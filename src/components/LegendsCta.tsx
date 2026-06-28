@@ -16,7 +16,7 @@ export function LegendsCta() {
       </div>
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl animate-pulse-glow"
-        style={{ background: "radial-gradient(circle, rgba(61,214,245,0.35) 0%, transparent 65%)" }}
+        style={{ background: "radial-gradient(circle, rgba(109,91,255,0.40) 0%, transparent 65%)" }}
       />
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center px-4 text-center sm:px-6">
@@ -33,7 +33,7 @@ export function LegendsCta() {
           target="_blank"
           rel="noopener noreferrer"
           className="glow-accent mt-9 inline-flex items-center gap-2 rounded-full px-9 py-3.5 text-base font-bold text-chad-bg transition-opacity hover:opacity-90"
-          style={{ background: "linear-gradient(135deg, #3DD6F5, #56C7B0)" }}
+          style={{ background: "linear-gradient(135deg, #6D5BFF, #9B8CFF)" }}
         >
           Download app
         </a>

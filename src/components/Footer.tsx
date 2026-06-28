@@ -25,8 +25,8 @@ export function Footer() {
           <div>
             <h4 className="mb-3 text-xs font-semibold tracking-[0.18em] text-chad-muted">PRODUCT</h4>
             <ul className="space-y-2 text-sm text-white/80">
+              <li><Link href="#web" className="hover:text-chad-accent transition-colors">Web app</Link></li>
               <li><Link href="#features" className="hover:text-chad-accent transition-colors">Features</Link></li>
-              <li><Link href="#how-it-works" className="hover:text-chad-accent transition-colors">How it works</Link></li>
               <li><Link href="#faq" className="hover:text-chad-accent transition-colors">FAQ</Link></li>
             </ul>
           </div>

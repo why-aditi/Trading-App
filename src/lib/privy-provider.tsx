@@ -18,7 +18,7 @@ export function ChadPrivyProvider({ children }: { children: React.ReactNode }) {
         },
         appearance: {
           theme: "dark",
-          accentColor: "#3DD6F5",
+          accentColor: "#6D5BFF",
           logo: "/logo-dark.png",
         },
       }}
